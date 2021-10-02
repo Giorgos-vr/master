@@ -1,5 +1,5 @@
 # this is a simple phone book script that uses a PY dictionary in order to store and retrieve name:number pairs.
-# hopefully it will have a menu with 5 options, read, add, delete, search_and_edit and exit.
+# hit works using a menu with 5 options: read, add, delete, search_and_edit and exit.
 
 
 print("""This is a phonebook app
