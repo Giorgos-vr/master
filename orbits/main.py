@@ -5,7 +5,7 @@ import os
 width = 1280
 height = 720
 win = pygame.display.set_mode((width, height))
-pygame.display.set_caption("Orbital Resonance V0.1")
+pygame.display.set_caption("Orbital Resonance")
 
 
 
