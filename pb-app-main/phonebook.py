@@ -48,7 +48,7 @@ What would you like to to?"""))
 # search by key and delete, if-else exit loops should prevent user from accidentally deleting the wrong contact
 
     elif selection == "3":
-        search = (str(input("Please type the exact name of the contact wish to delete: ")))
+        search = (str(input("Please type the exact name of the contact you wish to delete: ")))
         if search in phonebook.keys():
             print("Name: ", search, "Number: ", phonebook[search])
             edit = (str(input("Is this the contact you are looking for? Y/N")))
