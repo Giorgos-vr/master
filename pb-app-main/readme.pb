@@ -5,4 +5,4 @@ and maybe give it some kind of GUI either as a web app or a stand-alone program.
 This is V0.1, it has the basic functionality described above built as a five-option-menu
 which uses a series of dialogues that enable user interface.
 
-Thank you! :)
+Wellcome! :)
