@@ -8,9 +8,9 @@ win = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Orbital Resonance")
 FPS = 30
 sun = pygame.image.load(os.path.join("assets", "sun.png"))
-sun_image = pygame.transform.scale(sun, (50,50))
+sun_image = pygame.transform.scale(sun, (50, 50))
 planet1 = pygame.image.load(os.path.join("assets", "planet1.png"))
-planet1_image = pygame.transform.scale(planet1, (30,30))
+planet1_image = pygame.transform.scale(planet1, (30, 30))
 planet2 = pygame.image.load(os.path.join("assets", "planet2.png"))
 planet2_image = pygame.transform.scale(planet2, (30, 30))
 planet3 = pygame.image.load(os.path.join("assets", "planet3.png"))
@@ -28,7 +28,6 @@ def draw_window():
     pygame.display.update()
 
 
-
 def main():
     clock = pygame.time.Clock()
     run = True
@@ -41,8 +40,7 @@ def main():
         draw_window()
 
 
-
-    pygame.quit()
+pygame.quit()
 
 
 if __name__ == "__main__":
