@@ -1,51 +1,84 @@
 import pygame
+import random
 import math
-import os
 
+screen = pygame.display.set_mode((1280, 720))
+pygame.display.set_caption("Orbital Resonance Cosmic Sounds")
 
-width = 1280
-height = 720
-win = pygame.display.set_mode((width, height))
-pygame.display.set_caption("Orbital Resonance")
-FPS = 30
-sun = pygame.image.load(os.path.join("assets", "sun.png"))
-sun_image = pygame.transform.scale(sun, (50, 50))
-planet1 = pygame.image.load(os.path.join("assets", "planet1.png"))
-planet1_image = pygame.transform.scale(planet1, (30, 30))
-planet2 = pygame.image.load(os.path.join("assets", "planet2.png"))
-planet2_image = pygame.transform.scale(planet2, (30, 30))
-planet3 = pygame.image.load(os.path.join("assets", "planet3.png"))
-planet3_image = pygame.transform.scale(planet3, (34, 27))
-planet4 = pygame.image.load(os.path.join("assets", "planet4.png"))
-planet4_image = pygame.transform.scale(planet4, (35, 35))
+white = (255, 255, 255)
+red = (247, 12, 36)
+blue = (12, 224, 247)
+yellow = (247, 224, 12)
+green = (12, 247, 32)
+grey = (200, 200, 200)
+black = (0, 0, 0)
 
+star_radius = 30
+center = (640, 360)
 
-def draw_window():
-    orbit1 = pygame.draw.circle(win, (247, 12, 36), (605, 337), 60, 2)
-    orbit2 = pygame.draw.circle(win, (12, 224, 247), (605, 337), 142, 2)
-    orbit3 = pygame.draw.circle(win, (247, 224, 12), (605, 337), 254, 2)
-    orbit4 = pygame.draw.circle(win, (12, 247, 32), (605, 337), 395, 2)
-    win.blit(sun_image, (580, 312))
-    win.blit(planet1_image, (650, 320))
-    win.blit(planet2_image, (730, 320))
-    win.blit(planet3_image, (840, 320))
-    win.blit(planet4_image, (980, 320))
-    pygame.display.update()
+planet1_x = 50
+planet1_y = 350
+planet2_x = 50
+planet2_y = 350
+planet3_x = 50
+planet3_y = 350
+planet4_x = 50
+planet4_y = 350
 
+planet1_orbit = 0
+planet2_orbit = 0
+planet3_orbit = 0
+planet4_orbit = 0
+sat1_orbit = 0
+sat2_orbit = 0
 
-def main():
-    clock = pygame.time.Clock()
-    run = True
-    while run:
-        clock.tick(FPS)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                run = False
+stars = [(random.randint(0, 1279), random.randint(0, 719)) for x in range(140)]
+clock = pygame.time.Clock()
+run = True
 
-        draw_window()
+while run:
 
-    pygame.quit()
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            run = False
 
+    planet1_x = math.cos(planet1_orbit) * 75 + 640
+    planet1_y = -math.sin(planet1_orbit) * 75 + 360
+    planet2_x = math.cos(planet2_orbit) * 125 + 640
+    planet2_y = -math.sin(planet2_orbit) * 125 + 360
+    planet3_x = math.cos(planet3_orbit) * 200 + 640
+    planet3_y = -math.sin(planet3_orbit) * 200 + 360
+    planet4_x = math.cos(planet4_orbit) * 275 + 640
+    planet4_y = -math.sin(planet4_orbit) * 275 + 360
+    sat1_x = math.cos(sat1_orbit) * 25 + planet4_x
+    sat1_y = -math.sin(sat1_orbit) * 25 + planet4_y
+    sat2_x = math.cos(sat2_orbit) * 50 + planet4_x
+    sat2_y = -math.sin(sat2_orbit) * 50 + planet4_y
 
-if __name__ == "__main__":
-    main()
+    planet1_orbit += .08
+    planet2_orbit += .04
+    planet3_orbit += .02
+    planet4_orbit += .01
+    sat1_orbit += .06
+    sat2_orbit += .03
+
+    screen.fill(black)
+
+    for star in stars:
+        x, y = star[0], star[1]
+        pygame.draw.line(screen, white, (x, y), (x, y))
+
+    pygame.draw.circle(screen, white, center, star_radius)
+
+    pygame.draw.circle(screen, blue, (int(planet1_x), int(planet1_y)), 7)
+    pygame.draw.circle(screen, red, (int(planet2_x), int(planet2_y)), 10)
+    pygame.draw.circle(screen, green, (int(planet3_x), int(planet3_y)), 7)
+    pygame.draw.circle(screen, yellow, (int(planet4_x), int(planet4_y)), 12)
+    pygame.draw.circle(screen, grey, (int(sat1_x), int(sat1_y)), 3)
+    pygame.draw.circle(screen, grey, (int(sat2_x), int(sat2_y)), 4)
+
+    pygame.display.flip()
+
+    clock.tick(60)
+
+pygame.quit()
