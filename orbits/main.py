@@ -16,14 +16,14 @@ black = (0, 0, 0)
 star_radius = 30
 center = (640, 360)
 
-planet1_x = 50
-planet1_y = 350
-planet2_x = 50
-planet2_y = 350
-planet3_x = 50
-planet3_y = 350
-planet4_x = 50
-planet4_y = 350
+planet1_x = 0
+planet1_y = 0
+planet2_x = 0
+planet2_y = 0
+planet3_x = 0
+planet3_y = 0
+planet4_x = 0
+planet4_y = 0
 
 planet1_orbit = 0
 planet2_orbit = 0
