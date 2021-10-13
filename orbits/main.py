@@ -70,12 +70,12 @@ while run:
 
     pygame.draw.circle(screen, white, center, star_radius)
 
-    pygame.draw.circle(screen, blue, (int(planet1_x), int(planet1_y)), 7)
-    pygame.draw.circle(screen, red, (int(planet2_x), int(planet2_y)), 10)
-    pygame.draw.circle(screen, green, (int(planet3_x), int(planet3_y)), 7)
-    pygame.draw.circle(screen, yellow, (int(planet4_x), int(planet4_y)), 12)
-    pygame.draw.circle(screen, grey, (int(sat1_x), int(sat1_y)), 3)
-    pygame.draw.circle(screen, grey, (int(sat2_x), int(sat2_y)), 4)
+    pygame.draw.circle(screen, blue, (planet1_x, planet1_y), 7)
+    pygame.draw.circle(screen, red, (planet2_x, planet2_y), 10)
+    pygame.draw.circle(screen, green, (planet3_x, planet3_y), 7)
+    pygame.draw.circle(screen, yellow, (planet4_x, planet4_y), 12)
+    pygame.draw.circle(screen, grey, (sat1_x, sat1_y), 3)
+    pygame.draw.circle(screen, grey, (sat2_x, sat2_y), 4)
 
     pygame.display.flip()
 
