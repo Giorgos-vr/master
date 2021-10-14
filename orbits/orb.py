@@ -10,11 +10,14 @@ red = (247, 12, 36)
 blue = (12, 224, 247)
 yellow = (247, 224, 12)
 green = (12, 247, 32)
-grey = (200, 200, 200)
+pink = (235, 63, 226)
+orange = (235, 158, 63)
 black = (0, 0, 0)
 
 star_radius = 30
 center = (640, 360)
+defaultX = 640
+defaultY = 360
 
 
 distance1 = 75
@@ -44,11 +47,13 @@ sat_size2 = 5
 
 
 class PlanetMove:
-    def planet_coors(planet_orbit, distance):
+    def planetX(planet_orbit, distance, X):
+        x = math.cos(planet_orbit) * distance + X
+        return x
 
-        planet_x = math.cos(planet_orbit) * distance + 640
-        planet_y = -math.sin(planet_orbit) * distance + 360
-        return planet_x, planet_y
+    def planetY(planet_orbit, distance, Y):
+        y = -math.sin(planet_orbit) * distance + Y
+        return y
     
 
 stars = [(random.randint(0, 1279), random.randint(0, 719)) for x in range(140)]
@@ -61,14 +66,24 @@ while run:
         if event.type == pygame.QUIT:
             run = False
 
-    PlanetMove.planet_coors(planet1_orbit, distance1)
+    X1 = PlanetMove.planetX(planet1_orbit, distance1, defaultX)
+    Y1 = PlanetMove.planetY(planet1_orbit, distance1, defaultY)
     planet1_orbit += angle1_inc
-    PlanetMove.planet_coors(planet2_orbit, distance2)
+    X2 = PlanetMove.planetX(planet2_orbit, distance2, defaultX)
+    Y2 = PlanetMove.planetY(planet2_orbit, distance2, defaultY)
     planet2_orbit += angle2_inc
-    PlanetMove.planet_coors(planet3_orbit, distance3)
+    X3 = PlanetMove.planetX(planet3_orbit, distance3, defaultX)
+    Y3 = PlanetMove.planetY(planet3_orbit, distance3, defaultY)
     planet3_orbit += angle3_inc
-    PlanetMove.planet_coors(planet4_orbit, distance4)
+    X4 = PlanetMove.planetX(planet4_orbit, distance4, defaultX)
+    Y4 = PlanetMove.planetY(planet4_orbit, distance4, defaultY)
     planet4_orbit += angle4_inc
+    sat_X1 = PlanetMove.planetX(sat_orb1, sat_dist1, X4)
+    sat_Y1 = PlanetMove.planetY(sat_orb1, sat_dist1, Y4)
+    sat_orb1 += sat_angle_inc1
+    sat_X2 = PlanetMove.planetX(sat_orb2, sat_dist2, X4)
+    sat_Y2 = PlanetMove.planetY(sat_orb2, sat_dist2, Y4)
+    sat_orb2 += sat_angle_inc2
 
 
     screen.fill(black)
@@ -77,11 +92,13 @@ while run:
         x, y = star[0], star[1]
         pygame.draw.line(screen, white, (x, y), (x, y))
 
-    pygame.draw.circle(screen, white, center, star_radius)
-    pygame.draw.circle(screen, yellow, (PlanetMove.planet_coors(planet1_orbit, distance1)), size1)
-    pygame.draw.circle(screen, blue, (PlanetMove.planet_coors(planet2_orbit, distance2)), size2)
-    pygame.draw.circle(screen, red, (PlanetMove.planet_coors(planet3_orbit, distance3)), size3)
-    pygame.draw.circle(screen, green, (PlanetMove.planet_coors(planet4_orbit, distance4)), size4)
+    pygame.draw.circle(screen, yellow, center, star_radius)
+    pygame.draw.circle(screen, red, (X1, Y1), size1)
+    pygame.draw.circle(screen, green, (X2, Y2), size2)
+    pygame.draw.circle(screen, white, (X3, Y3), size3)
+    pygame.draw.circle(screen, blue, (X4, Y4), size4)
+    pygame.draw.circle(screen, pink, (sat_X1, sat_Y1), sat_size1)
+    pygame.draw.circle(screen, orange, (sat_X2, sat_Y2), sat_size2)
 
     pygame.display.flip()
 
