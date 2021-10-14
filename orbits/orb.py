@@ -1,10 +1,14 @@
+# import libraries
+
 import pygame
 import random
 import math
 
+# setup screen
 screen = pygame.display.set_mode((1280, 720))
 pygame.display.set_caption("Orbital Resonance Cosmic Sounds (sounds coming soon)")
 
+# colour variables
 white = (255, 255, 255)
 red = (247, 12, 36)
 blue = (26, 9, 181)
@@ -16,12 +20,14 @@ orange = (235, 158, 63)
 cyan = (52, 235, 204)
 black = (0, 0, 0)
 
+# star basic parameters, default X,Y used for object position calculation, super important, do not change!
 star_radius = 30
 center = (640, 360)
 defaultX = 640
 defaultY = 360
 
-
+# object basic parameters, angle_inc defines rotation speed
+# angle change per frame, the lower the value=the slower the rotation speed relative to orbit radius
 distance1 = 75
 planet1_orbit = 0
 angle1_inc = .08
@@ -56,16 +62,21 @@ sat_angle_inc4 = .08
 sat_size4 = 3
 
 
+# heart of the beast, X and Y are a function of distance (orbit radius) + X or Y
+# where X and Y are either the default (central) X and Y for planets or the parent planet's X and Y for satellites
 class PlanetMove:
     def planetX(planet_orbit, distance, X):
         x = math.cos(planet_orbit) * distance + X
         return x
 
     def planetY(planet_orbit, distance, Y):
+        # changing this to a positive value (removing the minus sign) will change the output to a clockwise rotation
+        # instead of the counter-clockwise rotation we are currently implementing
         y = -math.sin(planet_orbit) * distance + Y
         return y
-    
 
+
+# background stars
 stars = [(random.randint(0, 1279), random.randint(0, 719)) for x in range(140)]
 clock = pygame.time.Clock()
 run = True
@@ -76,8 +87,10 @@ while run:
         if event.type == pygame.QUIT:
             run = False
 
+    # location coordinates calculations
     X1 = PlanetMove.planetX(planet1_orbit, distance1, defaultX)
     Y1 = PlanetMove.planetY(planet1_orbit, distance1, defaultY)
+    # changing the angle ensures motion, duh!
     planet1_orbit += angle1_inc
     X2 = PlanetMove.planetX(planet2_orbit, distance2, defaultX)
     Y2 = PlanetMove.planetY(planet2_orbit, distance2, defaultY)
@@ -88,12 +101,17 @@ while run:
     X4 = PlanetMove.planetX(planet4_orbit, distance4, defaultX)
     Y4 = PlanetMove.planetY(planet4_orbit, distance4, defaultY)
     planet4_orbit += angle4_inc
+
+    # here we assign X4 and Y4 instead of the default ones
+    # to assign object to planet 4 as a satellite instead of assigning it to the central star as another planet
     sat_X1 = PlanetMove.planetX(sat_orb1, sat_dist1, X4)
     sat_Y1 = PlanetMove.planetY(sat_orb1, sat_dist1, Y4)
     sat_orb1 += sat_angle_inc1
     sat_X2 = PlanetMove.planetX(sat_orb2, sat_dist2, X4)
     sat_Y2 = PlanetMove.planetY(sat_orb2, sat_dist2, Y4)
     sat_orb2 += sat_angle_inc2
+
+    # same for the satellites of planet 3
     sat_X3 = PlanetMove.planetX(sat_orb3, sat_dist3, X3)
     sat_Y3 = PlanetMove.planetY(sat_orb3, sat_dist3, Y3)
     sat_orb3 += sat_angle_inc3
@@ -101,13 +119,16 @@ while run:
     sat_Y4 = PlanetMove.planetY(sat_orb4, sat_dist4, Y3)
     sat_orb4 += sat_angle_inc4
 
-
+    # here we start drawing by first resetting the screen to black
     screen.fill(black)
 
+    # then we add the stars
     for star in stars:
         x, y = star[0], star[1]
         pygame.draw.line(screen, white, (x, y), (x, y))
 
+    # and then we add everything else starting with our stationary central star
+    # which is our "anchor point" in order to calculate everything else
     pygame.draw.circle(screen, yellow, center, star_radius)
     pygame.draw.circle(screen, red, (X1, Y1), size1)
     pygame.draw.circle(screen, green, (X2, Y2), size2)
@@ -118,6 +139,7 @@ while run:
     pygame.draw.circle(screen, cyan, (sat_X3, sat_Y3), sat_size3)
     pygame.draw.circle(screen, light_blue, (sat_X4, sat_Y4), sat_size4)
 
+    # flip, tick, repeat!
     pygame.display.flip()
 
     clock.tick(60)
