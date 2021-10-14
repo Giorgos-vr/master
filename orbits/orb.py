@@ -7,11 +7,13 @@ pygame.display.set_caption("Orbital Resonance Cosmic Sounds (sounds coming soon)
 
 white = (255, 255, 255)
 red = (247, 12, 36)
-blue = (12, 224, 247)
+blue = (26, 9, 181)
+light_blue = (12, 224, 247)
 yellow = (247, 224, 12)
 green = (12, 247, 32)
 pink = (235, 63, 226)
 orange = (235, 158, 63)
+cyan = (52, 235, 204)
 black = (0, 0, 0)
 
 star_radius = 30
@@ -31,19 +33,27 @@ size2 = 10
 distance3 = 225
 planet3_orbit = 0
 angle3_inc = .02
-size3 = 8
+size3 = 9
 distance4 = 325
 planet4_orbit = 0
 angle4_inc = .01
-size4 = 12
-sat_dist1 = 25
+size4 = 14
+sat_dist1 = 30
 sat_orb1 = 0
 sat_angle_inc1 = .06
 sat_size1 = 2
-sat_dist2 = 50
+sat_dist2 = 60
 sat_orb2 = 0
 sat_angle_inc2 = .03
 sat_size2 = 5
+sat_dist3 = 22
+sat_orb3 = 0
+sat_angle_inc3 = .12
+sat_size3 = 4
+sat_dist4 = 45
+sat_orb4 = 0
+sat_angle_inc4 = .08
+sat_size4 = 3
 
 
 class PlanetMove:
@@ -84,6 +94,12 @@ while run:
     sat_X2 = PlanetMove.planetX(sat_orb2, sat_dist2, X4)
     sat_Y2 = PlanetMove.planetY(sat_orb2, sat_dist2, Y4)
     sat_orb2 += sat_angle_inc2
+    sat_X3 = PlanetMove.planetX(sat_orb3, sat_dist3, X3)
+    sat_Y3 = PlanetMove.planetY(sat_orb3, sat_dist3, Y3)
+    sat_orb3 += sat_angle_inc3
+    sat_X4 = PlanetMove.planetX(sat_orb4, sat_dist4, X3)
+    sat_Y4 = PlanetMove.planetY(sat_orb4, sat_dist4, Y3)
+    sat_orb4 += sat_angle_inc4
 
 
     screen.fill(black)
@@ -99,6 +115,8 @@ while run:
     pygame.draw.circle(screen, blue, (X4, Y4), size4)
     pygame.draw.circle(screen, pink, (sat_X1, sat_Y1), sat_size1)
     pygame.draw.circle(screen, orange, (sat_X2, sat_Y2), sat_size2)
+    pygame.draw.circle(screen, cyan, (sat_X3, sat_Y3), sat_size3)
+    pygame.draw.circle(screen, light_blue, (sat_X4, sat_Y4), sat_size4)
 
     pygame.display.flip()
 
