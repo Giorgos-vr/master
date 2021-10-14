@@ -3,7 +3,7 @@ import random
 import math
 
 screen = pygame.display.set_mode((1280, 720))
-pygame.display.set_caption("Orbital Resonance Cosmic Sounds")
+pygame.display.set_caption("Orbital Resonance Cosmic Sounds (sounds coming soon)")
 
 white = (255, 255, 255)
 red = (247, 12, 36)
