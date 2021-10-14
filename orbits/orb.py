@@ -61,11 +61,16 @@ sat_orb4 = 0
 sat_angle_inc4 = .08
 sat_size4 = 3
 
+# background stars and clock variable
+stars = [(random.randint(0, 1279), random.randint(0, 719)) for x in range(140)]
+clock = pygame.time.Clock()
 
 # heart of the beast, X and Y are a function of distance (orbit radius) + X or Y
 # where X and Y are either the default (central) X and Y for planets or the parent planet's X and Y for satellites
 class PlanetMove:
     def planetX(planet_orbit, distance, X):
+        # changing this to a negative value will move the starting point
+        # to the left instead of the right where it is at the moment
         x = math.cos(planet_orbit) * distance + X
         return x
 
@@ -76,9 +81,6 @@ class PlanetMove:
         return y
 
 
-# background stars
-stars = [(random.randint(0, 1279), random.randint(0, 719)) for x in range(140)]
-clock = pygame.time.Clock()
 run = True
 
 while run:
