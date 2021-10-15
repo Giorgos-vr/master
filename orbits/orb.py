@@ -1,9 +1,12 @@
 # import libraries
 
 import pygame
+from pygame import mixer
 import random
 import math
 
+pygame.init()
+pygame.mixer.init()
 # setup screen
 screen = pygame.display.set_mode((1280, 720))
 pygame.display.set_caption("Orbital Resonance Cosmic Sounds (sounds coming soon)")
@@ -32,6 +35,7 @@ distance1 = 75
 planet1_orbit = 0
 angle1_inc = .08
 size1 = 6
+planet1_sound = mixer.Sound('f-major.wav')
 distance2 = 125
 planet2_orbit = 0
 angle2_inc = .04
@@ -80,6 +84,10 @@ class PlanetMove:
         y = -math.sin(planet_orbit) * distance + Y
         return y
 
+    def tone(sound):
+        sound.play(0)
+
+
 
 run = True
 
@@ -89,10 +97,13 @@ while run:
         if event.type == pygame.QUIT:
             run = False
 
-    # location coordinates calculations
+    # coordinates calculations
     X1 = PlanetMove.planetX(planet1_orbit, distance1, defaultX)
     Y1 = PlanetMove.planetY(planet1_orbit, distance1, defaultY)
-    # changing the angle ensures motion, duh!
+    if X1 == 715 and Y1 == 360:
+        PlanetMove.tone(planet1_sound)
+
+    # changing the angle is what makes it move
     planet1_orbit += angle1_inc
     X2 = PlanetMove.planetX(planet2_orbit, distance2, defaultX)
     Y2 = PlanetMove.planetY(planet2_orbit, distance2, defaultY)
@@ -104,8 +115,8 @@ while run:
     Y4 = PlanetMove.planetY(planet4_orbit, distance4, defaultY)
     planet4_orbit += angle4_inc
 
-    # here we assign X4 and Y4 instead of the default ones
-    # to assign object to planet 4 as a satellite instead of assigning it to the central star as another planet
+    # here we assign X4 and Y4 instead of the default ones in order
+    # to assign object to planet 4 as a satellite instead of assigning it to the central star as yet another planet
     sat_X1 = PlanetMove.planetX(sat_orb1, sat_dist1, X4)
     sat_Y1 = PlanetMove.planetY(sat_orb1, sat_dist1, Y4)
     sat_orb1 += sat_angle_inc1
@@ -130,7 +141,6 @@ while run:
         pygame.draw.line(screen, white, (x, y), (x, y))
 
     # and then we add everything else starting with our stationary central star
-    # which is our "anchor point" in order to calculate everything else
     pygame.draw.circle(screen, yellow, center, star_radius)
     pygame.draw.circle(screen, red, (X1, Y1), size1)
     pygame.draw.circle(screen, green, (X2, Y2), size2)
