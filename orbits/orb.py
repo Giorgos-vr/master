@@ -9,7 +9,7 @@ pygame.init()
 pygame.mixer.init()
 # setup screen
 screen = pygame.display.set_mode((1280, 720))
-pygame.display.set_caption("Orbital Resonance Cosmic Sounds (sounds coming soon)")
+pygame.display.set_caption("Orbital Resonance Cosmic Sounds")
 
 # colour variables
 white = (255, 255, 255)
