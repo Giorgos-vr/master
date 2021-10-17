@@ -71,6 +71,8 @@ clock = pygame.time.Clock()
 
 # heart of the beast, X and Y are a function of distance (orbit radius) + X or Y
 # where X and Y are either the default (central) X and Y for planets or the parent planet's X and Y for satellites
+
+
 class PlanetMove:
     def planetX(planet_orbit, distance, X):
         # changing this to a negative value will move the starting point
@@ -86,7 +88,6 @@ class PlanetMove:
 
     def tone(sound):
         sound.play(0)
-
 
 
 run = True
