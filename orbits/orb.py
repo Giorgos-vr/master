@@ -35,19 +35,22 @@ distance1 = 75
 planet1_orbit = 0
 angle1_inc = .08
 size1 = 6
-planet1_sound = mixer.Sound('f-major.wav')
+planet1_sound = mixer.Sound('f-major-3rd.wav')
 distance2 = 125
 planet2_orbit = 0
 angle2_inc = .04
 size2 = 10
+planet2_sound = mixer.Sound('f-minor-3rd.wav')
 distance3 = 225
 planet3_orbit = 0
 angle3_inc = .02
 size3 = 9
+planet3_sound = mixer.Sound('f-minor-4th.wav')
 distance4 = 325
 planet4_orbit = 0
 angle4_inc = .01
 size4 = 14
+planet4_sound = mixer.Sound('f-major-4th.wav')
 sat_dist1 = 30
 sat_orb1 = 0
 sat_angle_inc1 = .06
@@ -101,19 +104,24 @@ while run:
     # coordinates calculations
     X1 = PlanetMove.planetX(planet1_orbit, distance1, defaultX)
     Y1 = PlanetMove.planetY(planet1_orbit, distance1, defaultY)
-    if X1 == 715 and Y1 == 360:
+    if pygame.Rect(710, 355, 10, 10).collidepoint(X1, Y1):
         PlanetMove.tone(planet1_sound)
-
     # changing the angle is what makes it move
     planet1_orbit += angle1_inc
     X2 = PlanetMove.planetX(planet2_orbit, distance2, defaultX)
     Y2 = PlanetMove.planetY(planet2_orbit, distance2, defaultY)
+    if pygame.Rect(760, 355, 10, 10).collidepoint(X2, Y2):
+        PlanetMove.tone(planet2_sound)
     planet2_orbit += angle2_inc
     X3 = PlanetMove.planetX(planet3_orbit, distance3, defaultX)
     Y3 = PlanetMove.planetY(planet3_orbit, distance3, defaultY)
+    if pygame.Rect(860, 355, 10, 10).collidepoint(X3, Y3):
+        PlanetMove.tone(planet3_sound)
     planet3_orbit += angle3_inc
     X4 = PlanetMove.planetX(planet4_orbit, distance4, defaultX)
     Y4 = PlanetMove.planetY(planet4_orbit, distance4, defaultY)
+    if pygame.Rect(960, 355, 10, 10).collidepoint(X4, Y4):
+        PlanetMove.tone(planet4_sound)
     planet4_orbit += angle4_inc
 
     # here we assign X4 and Y4 instead of the default ones in order
