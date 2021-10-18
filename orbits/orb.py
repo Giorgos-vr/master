@@ -150,10 +150,10 @@ while run:
         pygame.draw.line(screen, white, (x, y), (x, y))
 
     # and then we add everything else starting with our stationary central star
-    pygame.draw.circle(screen, yellow, center, star_radius)
+    pygame.draw.circle(screen, white, center, star_radius)
     pygame.draw.circle(screen, red, (X1, Y1), size1)
     pygame.draw.circle(screen, green, (X2, Y2), size2)
-    pygame.draw.circle(screen, white, (X3, Y3), size3)
+    pygame.draw.circle(screen, yellow, (X3, Y3), size3)
     pygame.draw.circle(screen, blue, (X4, Y4), size4)
     pygame.draw.circle(screen, pink, (sat_X1, sat_Y1), sat_size1)
     pygame.draw.circle(screen, orange, (sat_X2, sat_Y2), sat_size2)
