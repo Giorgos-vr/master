@@ -55,7 +55,7 @@ def  main():
     planet4_orbit = 0
     angle4_inc = .01
     size4 = 14
-    planet4_sound = mixer.Sound('C3_ff')
+    planet4_sound = mixer.Sound('C3_ff.wav')
     sat_dist1 = 30
     sat_orb1 = 0
     sat_angle_inc1 = .06
