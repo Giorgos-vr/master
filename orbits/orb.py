@@ -129,23 +129,35 @@ def  main():
         X1 = PlanetMove.planetX(planet1_orbit, distance1, defaultX)
         Y1 = PlanetMove.planetY(planet1_orbit, distance1, defaultY)
         if pygame.Rect(710, 355, 10, 10).collidepoint(X1, Y1):
-            PlanetMove.tone(planet1_sound)
+            if Planet1 == True:
+                PlanetMove.tone(planet1_sound)
+            else:
+                pass
         # changing the angle is what makes it move
         planet1_orbit += angle1_inc
         X2 = PlanetMove.planetX(planet2_orbit, distance2, defaultX)
         Y2 = PlanetMove.planetY(planet2_orbit, distance2, defaultY)
         if pygame.Rect(760, 355, 10, 10).collidepoint(X2, Y2):
-            PlanetMove.tone(planet2_sound)
+            if Planet2 == True:
+                PlanetMove.tone(planet2_sound)
+            else:
+                pass
         planet2_orbit += angle2_inc
         X3 = PlanetMove.planetX(planet3_orbit, distance3, defaultX)
         Y3 = PlanetMove.planetY(planet3_orbit, distance3, defaultY)
         if pygame.Rect(860, 355, 10, 10).collidepoint(X3, Y3):
-            PlanetMove.tone(planet3_sound)
+            if Planet3 == True:
+                PlanetMove.tone(planet3_sound)
+            else:
+                pass
         planet3_orbit += angle3_inc
         X4 = PlanetMove.planetX(planet4_orbit, distance4, defaultX)
         Y4 = PlanetMove.planetY(planet4_orbit, distance4, defaultY)
         if pygame.Rect(960, 355, 10, 10).collidepoint(X4, Y4):
-            PlanetMove.tone(planet4_sound)
+            if Planet4 == True:
+                PlanetMove.tone(planet4_sound)
+            else:
+                pass
         planet4_orbit += angle4_inc
 
         # here we assign X4 and Y4 instead of the default ones in order
