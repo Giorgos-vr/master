@@ -1,77 +1,84 @@
+# import libraries
+
+import pygame
+from pygame import mixer
+import random
+import math
+
+pygame.init()
+pygame.mixer.init()
+
+# colour variables
+white = (255, 255, 255)
+red = (247, 12, 36)
+blue = (26, 9, 181)
+light_blue = (12, 224, 247)
+yellow = (247, 224, 12)
+green = (12, 247, 32)
+pink = (235, 63, 226)
+orange = (235, 158, 63)
+cyan = (52, 235, 204)
+black = (0, 0, 0)
+
+# star basic parameters, default X,Y used for object position calculation, super important, do not change!
+star_radius = 30
+center = (640, 360)
+defaultX = 640
+defaultY = 360
+
+# object basic parameters, angle_inc defines rotation speed
+# angle change per frame, the lower the value=the slower the rotation speed relative to orbit radius
+Planet1 = True
+distance1 = 75
+angle1_inc = .08
+size1 = 6
+planet1_sound = mixer.Sound('G4_ff.wav')
+Planet2 = True
+distance2 = 125
+angle2_inc = .04
+size2 = 10
+planet2_sound = mixer.Sound('C5_ff.wav')
+Planet3 = True
+distance3 = 225
+angle3_inc = .02
+size3 = 9
+planet3_sound = mixer.Sound('C4_ff.wav')
+Planet4 = True
+distance4 = 325
+angle4_inc = .01
+size4 = 14
+planet4_sound = mixer.Sound('C3_ff.wav')
+sat_dist1 = 30
+sat_angle_inc1 = .06
+sat_size1 = 2
+sat_dist2 = 60
+sat_angle_inc2 = .03
+sat_size2 = 5
+sat_dist3 = 22
+sat_angle_inc3 = .12
+sat_size3 = 4
+sat_dist4 = 45
+sat_angle_inc4 = .08
+sat_size4 = 3
+
+
 def  main():
-    # import libraries
 
-    import pygame
-    from pygame import mixer
-    import random
-    import math
-
-    pygame.init()
-    pygame.mixer.init()
+    planet1_orbit = 0
+    planet2_orbit = 0
+    planet3_orbit = 0
+    planet4_orbit = 0
+    sat_orb1 = 0
+    sat_orb2 = 0
+    sat_orb3 = 0
+    sat_orb4 = 0
+    
     # setup screen
     screen = pygame.display.set_mode((1280, 720))
     pygame.display.set_caption("Orbital Resonance Cosmic Sounds")
 
-    # colour variables
-    white = (255, 255, 255)
-    red = (247, 12, 36)
-    blue = (26, 9, 181)
-    light_blue = (12, 224, 247)
-    yellow = (247, 224, 12)
-    green = (12, 247, 32)
-    pink = (235, 63, 226)
-    orange = (235, 158, 63)
-    cyan = (52, 235, 204)
-    black = (0, 0, 0)
 
-    # star basic parameters, default X,Y used for object position calculation, super important, do not change!
-    star_radius = 30
-    center = (640, 360)
-    defaultX = 640
-    defaultY = 360
 
-    # object basic parameters, angle_inc defines rotation speed
-    # angle change per frame, the lower the value=the slower the rotation speed relative to orbit radius
-    Planet1 = True
-    distance1 = 75
-    planet1_orbit = 0
-    angle1_inc = .08
-    size1 = 6
-    planet1_sound = mixer.Sound('G4_ff.wav')
-    Planet2 = True
-    distance2 = 125
-    planet2_orbit = 0
-    angle2_inc = .04
-    size2 = 10
-    planet2_sound = mixer.Sound('C5_ff.wav')
-    Planet3 = True
-    distance3 = 225
-    planet3_orbit = 0
-    angle3_inc = .02
-    size3 = 9
-    planet3_sound = mixer.Sound('C4_ff.wav')
-    Planet4 = True
-    distance4 = 325
-    planet4_orbit = 0
-    angle4_inc = .01
-    size4 = 14
-    planet4_sound = mixer.Sound('C3_ff.wav')
-    sat_dist1 = 30
-    sat_orb1 = 0
-    sat_angle_inc1 = .06
-    sat_size1 = 2
-    sat_dist2 = 60
-    sat_orb2 = 0
-    sat_angle_inc2 = .03
-    sat_size2 = 5
-    sat_dist3 = 22
-    sat_orb3 = 0
-    sat_angle_inc3 = .12
-    sat_size3 = 4
-    sat_dist4 = 45
-    sat_orb4 = 0
-    sat_angle_inc4 = .08
-    sat_size4 = 3
 
     # background stars and clock variable
     stars = [(random.randint(0, 1279), random.randint(0, 719)) for x in range(140)]
