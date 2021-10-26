@@ -77,16 +77,12 @@ def  main():
     screen = pygame.display.set_mode((1280, 720))
     pygame.display.set_caption("Orbital Resonance Cosmic Sounds")
 
-
-
-
     # background stars and clock variable
     stars = [(random.randint(0, 1279), random.randint(0, 719)) for x in range(140)]
     clock = pygame.time.Clock()
 
     # heart of the beast, X and Y are a function of distance (orbit radius) + X or Y
     # where X and Y are either the default (central) X and Y for planets or the parent planet's X and Y for satellites
-
 
     class PlanetMove:
         def planetX(planet_orbit, distance, X):
@@ -120,8 +116,6 @@ def  main():
             pygame.draw.circle(screen, blue, (X4, Y4), size4)
             pygame.draw.circle(screen, pink, (sat_X1, sat_Y1), sat_size1)
             pygame.draw.circle(screen, orange, (sat_X2, sat_Y2), sat_size2)
-
-
 
 
     run = True
