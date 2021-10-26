@@ -1,9 +1,9 @@
 # import libraries
 
-import pygame
-from pygame import mixer
 import random
 import math
+import pygame
+from pygame import mixer
 
 pygame.init()
 pygame.mixer.init()
