@@ -62,7 +62,7 @@ sat_angle_inc4 = .08
 sat_size4 = 3
 
 
-def  main():
+def main():
 
     planet1_orbit = 0
     planet2_orbit = 0
@@ -72,7 +72,7 @@ def  main():
     sat_orb2 = 0
     sat_orb3 = 0
     sat_orb4 = 0
-    
+
     # setup screen
     screen = pygame.display.set_mode((1280, 720))
     pygame.display.set_caption("Orbital Resonance Cosmic Sounds")
@@ -111,12 +111,11 @@ def  main():
             pygame.draw.circle(screen, yellow, (X3, Y3), size3)
             pygame.draw.circle(screen, cyan, (sat_X3, sat_Y3), sat_size3)
             pygame.draw.circle(screen, light_blue, (sat_X4, sat_Y4), sat_size4)
-        
+
         def Planet4():
             pygame.draw.circle(screen, blue, (X4, Y4), size4)
             pygame.draw.circle(screen, pink, (sat_X1, sat_Y1), sat_size1)
             pygame.draw.circle(screen, orange, (sat_X2, sat_Y2), sat_size2)
-
 
     run = True
 
@@ -204,13 +203,14 @@ def  main():
             img.Planet4()
         else:
             pass
-        
+
         # flip, tick, repeat!
         pygame.display.flip()
 
         clock.tick(60)
 
     pygame.quit()
+
 
 if __name__ == "__main__":
     main()
