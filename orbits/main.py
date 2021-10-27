@@ -135,6 +135,7 @@ def main():
                 pass
         # changing the angle is what makes it move
         planet1_orbit += angle1_inc
+        
         X2 = PlanetMove.planetX(planet2_orbit, distance2, defaultX)
         Y2 = PlanetMove.planetY(planet2_orbit, distance2, defaultY)
         if pygame.Rect(760, 355, 10, 10).collidepoint(X2, Y2):
@@ -143,6 +144,7 @@ def main():
             else:
                 pass
         planet2_orbit += angle2_inc
+        
         X3 = PlanetMove.planetX(planet3_orbit, distance3, defaultX)
         Y3 = PlanetMove.planetY(planet3_orbit, distance3, defaultY)
         if pygame.Rect(860, 355, 10, 10).collidepoint(X3, Y3):
@@ -151,6 +153,7 @@ def main():
             else:
                 pass
         planet3_orbit += angle3_inc
+        
         X4 = PlanetMove.planetX(planet4_orbit, distance4, defaultX)
         Y4 = PlanetMove.planetY(planet4_orbit, distance4, defaultY)
         if pygame.Rect(960, 355, 10, 10).collidepoint(X4, Y4):
