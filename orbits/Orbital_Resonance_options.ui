@@ -14,7 +14,7 @@
    <string>Orbital Resonance Options</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="Run">
     <property name="geometry">
      <rect>
       <x>354</x>
@@ -30,7 +30,7 @@
      <string>Run</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox">
+   <widget class="QCheckBox" name="planet1__flag">
     <property name="geometry">
      <rect>
       <x>80</x>
@@ -48,7 +48,7 @@
      <string>Planet 1</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox_2">
+   <widget class="QCheckBox" name="planet2__flag">
     <property name="geometry">
      <rect>
       <x>80</x>
@@ -66,7 +66,7 @@
      <string>Planet 2</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox_3">
+   <widget class="QCheckBox" name="planet3__flag">
     <property name="geometry">
      <rect>
       <x>80</x>
@@ -84,7 +84,7 @@
      <string>Planet 3</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox_4">
+   <widget class="QCheckBox" name="planet4__flag">
     <property name="geometry">
      <rect>
       <x>80</x>
@@ -122,7 +122,7 @@
      <string>Choose which planets you want to have orbiting.</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox">
+   <widget class="QComboBox" name="speed">
     <property name="geometry">
      <rect>
       <x>560</x>

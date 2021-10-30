@@ -1,9 +1,11 @@
 # import libraries
 
+import sys
 import random
 import math
 import pygame
 from pygame import mixer
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 pygame.init()
 pygame.mixer.init()
@@ -60,6 +62,114 @@ sat_size3 = 4
 sat_dist4 = 45
 sat_angle_inc4 = .08
 sat_size4 = 3
+
+
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(800, 600)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.Run = QtWidgets.QPushButton(self.centralwidget)
+        self.Run.setGeometry(QtCore.QRect(354, 510, 93, 28))
+        self.Run.setObjectName("Run")
+        self.planet1__flag = QtWidgets.QCheckBox(self.centralwidget)
+        self.planet1__flag.setGeometry(QtCore.QRect(80, 110, 141, 91))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.planet1__flag.setFont(font)
+        self.planet1__flag.setObjectName("planet1__flag")
+        self.planet2__flag = QtWidgets.QCheckBox(self.centralwidget)
+        self.planet2__flag.setGeometry(QtCore.QRect(80, 210, 121, 71))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.planet2__flag.setFont(font)
+        self.planet2__flag.setObjectName("planet2__flag")
+        self.planet3__flag = QtWidgets.QCheckBox(self.centralwidget)
+        self.planet3__flag.setGeometry(QtCore.QRect(80, 310, 121, 61))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.planet3__flag.setFont(font)
+        self.planet3__flag.setObjectName("planet3__flag")
+        self.planet4__flag = QtWidgets.QCheckBox(self.centralwidget)
+        self.planet4__flag.setGeometry(QtCore.QRect(80, 390, 131, 71))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.planet4__flag.setFont(font)
+        self.planet4__flag.setObjectName("planet4__flag")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(20, 10, 451, 101))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label.setFont(font)
+        self.label.setObjectName("label")
+        self.speed = QtWidgets.QComboBox(self.centralwidget)
+        self.speed.setGeometry(QtCore.QRect(560, 130, 141, 51))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.speed.setFont(font)
+        self.speed.setObjectName("speed")
+        self.speed.addItem("")
+        self.speed.addItem("")
+        self.speed.addItem("")
+        self.speed.addItem("")
+        self.speed.addItem("")
+        self.speed.addItem("")
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setGeometry(QtCore.QRect(530, 40, 191, 41))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_2.setFont(font)
+        self.label_2.setObjectName("label_2")
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
+        self.menubar.setObjectName("menubar")
+        self.menuFile = QtWidgets.QMenu(self.menubar)
+        self.menuFile.setObjectName("menuFile")
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
+        self.actionExit = QtWidgets.QAction(MainWindow)
+        self.actionExit.setObjectName("actionExit")
+        self.menuFile.addAction(self.actionExit)
+        self.menubar.addAction(self.menuFile.menuAction())
+
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "Orbital Resonance Options"))
+        self.Run.setStatusTip(_translate("MainWindow", "RUN!"))
+        self.Run.setText(_translate("MainWindow", "Run"))
+        self.planet1__flag.setText(_translate("MainWindow", "Planet 1"))
+        self.planet2__flag.setText(_translate("MainWindow", "Planet 2"))
+        self.planet3__flag.setText(_translate("MainWindow", "Planet 3"))
+        self.planet4__flag.setText(_translate("MainWindow", "Planet 4"))
+        self.label.setText(_translate("MainWindow", "Choose which planets you want to have orbiting."))
+        self.speed.setItemText(0, _translate("MainWindow", "Normal 1/2"))
+        self.speed.setItemText(1, _translate("MainWindow", "Normal 1/3"))
+        self.speed.setItemText(2, _translate("MainWindow", "Fast 1/2"))
+        self.speed.setItemText(3, _translate("MainWindow", "Fast 1/3"))
+        self.speed.setItemText(4, _translate("MainWindow", "Faster 1/2"))
+        self.speed.setItemText(5, _translate("MainWindow", "Faster 1/3"))
+        self.label_2.setText(_translate("MainWindow", "Speed and resonance frequency"))
+        self.menuFile.setTitle(_translate("MainWindow", "File"))
+        self.actionExit.setText(_translate("MainWindow", "Exit"))
+        self.actionExit.setStatusTip(_translate("MainWindow", "Quit"))
+        self.actionExit.setShortcut(_translate("MainWindow", "Ctrl+Q"))
+
+        self.Run.clicked.connect(self.pressed)
+
+    def pressed(self):
+        main()
+        self.Run.clicked.connect(self.close)
+    
+
 
 
 def main():
@@ -216,4 +326,11 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
+
+    
