@@ -1,5 +1,6 @@
 This is the first version of 'Orbital Resonance Cosmic Sounds'
 if you wish to run it please download the entire folder and make sure the all .WAV files are in the same folder as main.py or main.exe.
+(if you choose to run it through your prefered IDE by loading the .py instead of the .exe please make sure you have all the necessary libraries installed first)
 
 First of all please watch this youtube video as it explains the physical mechanics behind this phenomenon a lot better than I ever could.
 
