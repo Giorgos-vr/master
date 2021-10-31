@@ -164,10 +164,10 @@ class Ui_MainWindow(object):
         self.actionExit.setShortcut(_translate("MainWindow", "Ctrl+Q"))
 
         self.Run.clicked.connect(self.pressed)
+        self.Run.clicked.connect(QtWidgets.qApp.quit)
 
     def pressed(self):
         main()
-        self.Run.clicked.connect(self.close)
     
 
 
