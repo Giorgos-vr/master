@@ -139,8 +139,12 @@ class Ui_MainWindow(object):
         self.menuFile.addAction(self.actionExit)
         self.menubar.addAction(self.menuFile.menuAction())
 
+        
+
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+        self.actionExit.triggered.connect(QtWidgets.qApp.quit)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -152,8 +156,8 @@ class Ui_MainWindow(object):
         self.planet3__flag.setText(_translate("MainWindow", "Planet 3"))
         self.planet4__flag.setText(_translate("MainWindow", "Planet 4"))
         self.label.setText(_translate("MainWindow", "Choose which planets you want to have orbiting."))
-        self.speed.setItemText(0, _translate("MainWindow", "Normal 1/2"))
-        self.speed.setItemText(1, _translate("MainWindow", "Normal 1/3"))
+        self.speed.setItemText(0, _translate("MainWindow", "Slow 1/2"))
+        self.speed.setItemText(1, _translate("MainWindow", "Slow 1/3"))
         self.speed.setItemText(2, _translate("MainWindow", "Fast 1/2"))
         self.speed.setItemText(3, _translate("MainWindow", "Fast 1/3"))
         self.speed.setItemText(4, _translate("MainWindow", "Faster 1/2"))
@@ -163,6 +167,8 @@ class Ui_MainWindow(object):
         self.actionExit.setText(_translate("MainWindow", "Exit"))
         self.actionExit.setStatusTip(_translate("MainWindow", "Quit"))
         self.actionExit.setShortcut(_translate("MainWindow", "Ctrl+Q"))
+
+       
 
         self.Run.clicked.connect(self.pressed)
         self.Run.clicked.connect(QtWidgets.qApp.quit)
