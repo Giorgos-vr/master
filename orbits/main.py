@@ -32,19 +32,19 @@ defaultY = 360
 # angle change per frame, the lower the value=the slower the rotation speed relative to orbit radius
 
 distance1 = 75
-angle1_inc = .08
+
 size1 = 6
 planet1_sound = mixer.Sound('G4_ff.wav')
 distance2 = 125
-angle2_inc = .04
+
 size2 = 10
 planet2_sound = mixer.Sound('C5_ff.wav')
 distance3 = 225
-angle3_inc = .02
+
 size3 = 9
 planet3_sound = mixer.Sound('C4_ff.wav')
 distance4 = 325
-angle4_inc = .01
+
 size4 = 14
 planet4_sound = mixer.Sound('C3_ff.wav')
 sat_dist1 = 30
@@ -112,12 +112,12 @@ class Ui_MainWindow(object):
         font.setPointSize(10)
         self.speed.setFont(font)
         self.speed.setObjectName("speed")
-        self.speed.addItem("")
-        self.speed.addItem("")
-        self.speed.addItem("")
-        self.speed.addItem("")
-        self.speed.addItem("")
-        self.speed.addItem("")
+        self.speed.addItem("Slow 1/2")
+        self.speed.addItem("Slow 1/3")
+        self.speed.addItem("Fast 1/2")
+        self.speed.addItem("Fast 1/3")
+        self.speed.addItem("Faster 1/2")
+        self.speed.addItem("Faster 1/3")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(530, 40, 191, 41))
         font = QtGui.QFont()
@@ -169,32 +169,63 @@ class Ui_MainWindow(object):
         self.actionExit.setShortcut(_translate("MainWindow", "Ctrl+Q"))
 
        
-
         self.Run.clicked.connect(self.pressed)
         self.Run.clicked.connect(QtWidgets.qApp.quit)
+
+    
+        
+        
 
     def checked(self):
         if self.planet1__flag.isChecked() == False:
             main.Planet1 = False
         else:
             main.Planet1 = True
-
         if self.planet2__flag.isChecked() == False:
             main.Planet2 = False
         else:
             main.Planet2 = True
-
         if self.planet3__flag.isChecked() == False:
             main.Planet3 = False
         else:
             main.Planet3 = True
-        
         if self.planet4__flag.isChecked() == False:
             main.Planet4 = False
         else:
             main.Planet4 = True
 
     def pressed(self):
+        index = self.speed.currentIndex()
+        if index == 0:
+            main.angle1_inc = .04
+            main.angle2_inc = .02
+            main.angle3_inc = .01
+            main.angle4_inc = .005
+        if index == 1:
+            main.angle1_inc = .06
+            main.angle2_inc = .03
+            main.angle3_inc = .015
+            main.angle4_inc = .005
+        if index == 2:
+            main.angle1_inc = .08
+            main.angle2_inc = .04
+            main.angle3_inc = .02
+            main.angle4_inc = .01
+        if index == 3:
+            main.angle1_inc = .09
+            main.angle2_inc = .06
+            main.angle3_inc = .03
+            main.angle4_inc = .01
+        if index == 4:
+            main.angle1_inc = .16
+            main.angle2_inc = .08
+            main.angle3_inc = .04
+            main.angle4_inc = .02
+        if index == 5:
+            main.angle1_inc = .18
+            main.angle2_inc = .09
+            main.angle3_inc = .06
+            main.angle4_inc = .03
         main()
     
 
@@ -272,7 +303,7 @@ def main():
             else:
                 pass
         # changing the angle is what makes it move
-        planet1_orbit += angle1_inc
+        planet1_orbit += main.angle1_inc
         
         X2 = PlanetMove.planetX(planet2_orbit, distance2, defaultX)
         Y2 = PlanetMove.planetY(planet2_orbit, distance2, defaultY)
@@ -281,7 +312,7 @@ def main():
                 PlanetMove.tone(planet2_sound)
             else:
                 pass
-        planet2_orbit += angle2_inc
+        planet2_orbit += main.angle2_inc
         
         X3 = PlanetMove.planetX(planet3_orbit, distance3, defaultX)
         Y3 = PlanetMove.planetY(planet3_orbit, distance3, defaultY)
@@ -290,7 +321,7 @@ def main():
                 PlanetMove.tone(planet3_sound)
             else:
                 pass
-        planet3_orbit += angle3_inc
+        planet3_orbit += main.angle3_inc
         
         X4 = PlanetMove.planetX(planet4_orbit, distance4, defaultX)
         Y4 = PlanetMove.planetY(planet4_orbit, distance4, defaultY)
@@ -299,7 +330,7 @@ def main():
                 PlanetMove.tone(planet4_sound)
             else:
                 pass
-        planet4_orbit += angle4_inc
+        planet4_orbit += main.angle4_inc
 
         # here we assign X4 and Y4 instead of the default ones in order
         # to assign object to planet 4 as a satellite instead of assigning it to the central star as yet another planet
