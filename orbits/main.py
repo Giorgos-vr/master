@@ -30,22 +30,19 @@ defaultY = 360
 
 # object basic parameters, angle_inc defines rotation speed
 # angle change per frame, the lower the value=the slower the rotation speed relative to orbit radius
-Planet1 = True
+
 distance1 = 75
 angle1_inc = .08
 size1 = 6
 planet1_sound = mixer.Sound('G4_ff.wav')
-Planet2 = True
 distance2 = 125
 angle2_inc = .04
 size2 = 10
 planet2_sound = mixer.Sound('C5_ff.wav')
-Planet3 = True
 distance3 = 225
 angle3_inc = .02
 size3 = 9
 planet3_sound = mixer.Sound('C4_ff.wav')
-Planet4 = True
 distance4 = 325
 angle4_inc = .01
 size4 = 14
@@ -70,7 +67,7 @@ class Ui_MainWindow(object):
         MainWindow.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.Run = QtWidgets.QPushButton(self.centralwidget)
+        self.Run = QtWidgets.QPushButton(self.centralwidget, clicked = lambda: self.checked())
         self.Run.setGeometry(QtCore.QRect(354, 510, 93, 28))
         self.Run.setObjectName("Run")
         self.planet1__flag = QtWidgets.QCheckBox(self.centralwidget)
@@ -83,24 +80,28 @@ class Ui_MainWindow(object):
         self.planet2__flag.setGeometry(QtCore.QRect(80, 210, 121, 71))
         font = QtGui.QFont()
         font.setPointSize(10)
+        self.planet1__flag.setChecked(True)
         self.planet2__flag.setFont(font)
         self.planet2__flag.setObjectName("planet2__flag")
         self.planet3__flag = QtWidgets.QCheckBox(self.centralwidget)
         self.planet3__flag.setGeometry(QtCore.QRect(80, 310, 121, 61))
         font = QtGui.QFont()
         font.setPointSize(10)
+        self.planet2__flag.setChecked(True)
         self.planet3__flag.setFont(font)
         self.planet3__flag.setObjectName("planet3__flag")
         self.planet4__flag = QtWidgets.QCheckBox(self.centralwidget)
         self.planet4__flag.setGeometry(QtCore.QRect(80, 390, 131, 71))
         font = QtGui.QFont()
         font.setPointSize(10)
+        self.planet3__flag.setChecked(True)
         self.planet4__flag.setFont(font)
         self.planet4__flag.setObjectName("planet4__flag")
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(20, 10, 451, 101))
         font = QtGui.QFont()
         font.setPointSize(12)
+        self.planet4__flag.setChecked(True)
         font.setBold(False)
         font.setWeight(50)
         self.label.setFont(font)
@@ -166,6 +167,27 @@ class Ui_MainWindow(object):
         self.Run.clicked.connect(self.pressed)
         self.Run.clicked.connect(QtWidgets.qApp.quit)
 
+    def checked(self):
+        if self.planet1__flag.isChecked() == False:
+            main.Planet1 = False
+        else:
+            main.Planet1 = True
+
+        if self.planet2__flag.isChecked() == False:
+            main.Planet2 = False
+        else:
+            main.Planet2 = True
+
+        if self.planet3__flag.isChecked() == False:
+            main.Planet3 = False
+        else:
+            main.Planet3 = True
+        
+        if self.planet4__flag.isChecked() == False:
+            main.Planet4 = False
+        else:
+            main.Planet4 = True
+
     def pressed(self):
         main()
     
@@ -211,18 +233,18 @@ def main():
             sound.play(0)
 
     class img:
-        def Planet1():
+        def Planet_1():
             pygame.draw.circle(screen, red, (X1, Y1), size1)
 
-        def Planet2():
+        def Planet_2():
             pygame.draw.circle(screen, green, (X2, Y2), size2)
 
-        def Planet3():
+        def Planet_3():
             pygame.draw.circle(screen, yellow, (X3, Y3), size3)
             pygame.draw.circle(screen, cyan, (sat_X3, sat_Y3), sat_size3)
             pygame.draw.circle(screen, light_blue, (sat_X4, sat_Y4), sat_size4)
 
-        def Planet4():
+        def Planet_4():
             pygame.draw.circle(screen, blue, (X4, Y4), size4)
             pygame.draw.circle(screen, pink, (sat_X1, sat_Y1), sat_size1)
             pygame.draw.circle(screen, orange, (sat_X2, sat_Y2), sat_size2)
@@ -239,7 +261,7 @@ def main():
         X1 = PlanetMove.planetX(planet1_orbit, distance1, defaultX)
         Y1 = PlanetMove.planetY(planet1_orbit, distance1, defaultY)
         if pygame.Rect(710, 355, 10, 10).collidepoint(X1, Y1):
-            if Planet1 == True:
+            if main.Planet1 == True:
                 PlanetMove.tone(planet1_sound)
             else:
                 pass
@@ -249,7 +271,7 @@ def main():
         X2 = PlanetMove.planetX(planet2_orbit, distance2, defaultX)
         Y2 = PlanetMove.planetY(planet2_orbit, distance2, defaultY)
         if pygame.Rect(760, 355, 10, 10).collidepoint(X2, Y2):
-            if Planet2 == True:
+            if main.Planet2 == True:
                 PlanetMove.tone(planet2_sound)
             else:
                 pass
@@ -258,7 +280,7 @@ def main():
         X3 = PlanetMove.planetX(planet3_orbit, distance3, defaultX)
         Y3 = PlanetMove.planetY(planet3_orbit, distance3, defaultY)
         if pygame.Rect(860, 355, 10, 10).collidepoint(X3, Y3):
-            if Planet3 == True:
+            if main.Planet3 == True:
                 PlanetMove.tone(planet3_sound)
             else:
                 pass
@@ -267,7 +289,7 @@ def main():
         X4 = PlanetMove.planetX(planet4_orbit, distance4, defaultX)
         Y4 = PlanetMove.planetY(planet4_orbit, distance4, defaultY)
         if pygame.Rect(960, 355, 10, 10).collidepoint(X4, Y4):
-            if Planet4 == True:
+            if main.Planet4 == True:
                 PlanetMove.tone(planet4_sound)
             else:
                 pass
@@ -300,20 +322,20 @@ def main():
 
         # and then we add everything else starting with our stationary central star
         pygame.draw.circle(screen, white, center, star_radius)
-        if Planet1 == True:
-            img.Planet1()
+        if main.Planet1 == True:
+            img.Planet_1()
         else:
             pass
-        if Planet2 == True:
-            img.Planet2()
+        if main.Planet2 == True:
+            img.Planet_2()
         else:
             pass
-        if Planet3 == True:
-            img.Planet3()
+        if main.Planet3 == True:
+            img.Planet_3()
         else:
             pass
-        if Planet4 == True:
-            img.Planet4()
+        if main.Planet4 == True:
+            img.Planet_4()
         else:
             pass
 
