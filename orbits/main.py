@@ -229,8 +229,6 @@ class Ui_MainWindow(object):
         main()
     
 
-
-
 def main():
 
     planet1_orbit = 0
