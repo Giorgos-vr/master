@@ -172,8 +172,6 @@ class Ui_MainWindow(object):
         self.Run.clicked.connect(self.pressed)
         self.Run.clicked.connect(QtWidgets.qApp.quit)
 
-    
-        
         
 
     def checked(self):
