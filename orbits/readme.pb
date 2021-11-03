@@ -10,9 +10,13 @@ The Planets Are Weirdly In Sync
 (long story short some planets and some moons are "weirdly in sync" around their parent star or planet and I think this is fascinating!)
 
 
+So this programm aims to visualise the orbital resonance phenomenon, each planet makes a unique sound once for every complete orbit.
+By default the orbiting planets are on a one to two resonance with each other meaning that for every two rotations of the innermost planet
+the next one only makes one and that for two of the second one's orbits the trird one makes one etc.
+
 In this version the user can use the check boxes on the left to select which planets will appear in the visualisation
-and on the drop-down menu on the right you will find a selection of three speed schemes and two resonanse types (1/2 and 1/3)
-make your selection, click run and enjoy!
+and on the drop-down menu on the right they will find a selection of three speed schemes and two resonanse types (1/2 and 1/3).
+So make your selection, click run and enjoy!
 
 
 credits to http://freepats.zenvoid.org/ for the sound samples
