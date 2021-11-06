@@ -1,14 +1,18 @@
 import numpy as num
 def roll():
-    dice1 = num.random.randint(1,21)
-    dice2 = num.random.randint(1,21)
+    dice = num.random.randint(1,21)
 
-    if dice1 == dice2:
-        print(f"ζάρι 1: {dice1} και ζάρι 2: {dice2} \n ΔΙΠΛΕΣ!!!")
-    else:
-        print(f"ζάρι 1: {dice1} και ζάρι 2: {dice2}")
+    print(dice)
+    if dice>=1 and dice< 5:
+        print("Άουτς!")
+    if dice>=5 and dice<10:
+        print("ΩΧ!")
+    if dice >= 10 and dice < 15:
+        print ("το'σωσες!")
+    if dice >= 15:
+        print("Μπράβο το αλάνι!")
 
-    rep = input("repeat? Y/N? ")
+    rep = input("Νέα ζαριά; Y/N?")
     if rep == ("Y") or rep == ("y"):
         roll()
     else:
