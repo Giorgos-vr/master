@@ -3,9 +3,9 @@ def roll():
     dice = num.random.randint(1,21)
 
     print(dice)
-    if dice>=1 and dice< 5:
+    if dice >= 1 and dice < 5:
         print("Άουτς!")
-    if dice>=5 and dice<10:
+    if dice >= 5 and dice < 10:
         print("ΩΧ!")
     if dice >= 10 and dice < 15:
         print ("το'σωσες!")
