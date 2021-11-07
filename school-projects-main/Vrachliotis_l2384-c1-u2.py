@@ -8,28 +8,28 @@ input("Πατήστε ENTER για να επιλέξετε το παράδειγ
 def main():
     class menu:
         def rand_func1():
-            a1 = num.random.rand(3)
-            print(a1)
+            result = num.random.rand(3)
+            print(result)
         def rand_func2():
-            a2 = num.random.rand(2,3)
-            print(a2)
+            result = num.random.rand(2,3)
+            print(result)
 
         def randn_func1():
-            b1 = num.random.randn(3)
-            print(b1)
+            result = num.random.randn(3)
+            print(result)
         def randn_func2():
-            b2 = num.random.randn(2,3)
-            print(b2)
+            result = num.random.randn(2,3)
+            print(result)
 
         def randint_func1():
-            c1 = int(num.random.randint(1,11,1))
-            print(c1)
+            result = int(num.random.randint(1,11,1))
+            print(result)
         def randint_func2():
-            c2 = num.random.randint(1,101,6)
-            print(c2)
+            result = num.random.randint(1,101,6)
+            print(result)
         def randint_func3():
-            c3 = num.random.randint(1,101 ,(2 , 3))
-            print(c3)
+            result = num.random.randint(1,101 ,(2 , 3))
+            print(result)
 
     
     print("""\nΓια να δείτε ένα διάνυσμα 3 τυχαίων αριθμών με την μέθοδο rand() επιλέξετε 1
