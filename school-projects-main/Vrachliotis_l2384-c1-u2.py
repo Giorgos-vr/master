@@ -10,6 +10,7 @@ def main():
         def rand_func1():
             result = num.random.rand(3)
             print(result)
+        
         def rand_func2():
             result = num.random.rand(2,3)
             print(result)
@@ -17,6 +18,7 @@ def main():
         def randn_func1():
             result = num.random.randn(3)
             print(result)
+        
         def randn_func2():
             result = num.random.randn(2,3)
             print(result)
@@ -24,9 +26,11 @@ def main():
         def randint_func1():
             result = int(num.random.randint(1,11,1))
             print(result)
+        
         def randint_func2():
             result = num.random.randint(1,101,6)
             print(result)
+        
         def randint_func3():
             result = num.random.randint(1,101 ,(2 , 3))
             print(result)
@@ -60,6 +64,9 @@ def main():
         menu.randint_func2()
     if selection == 7:
         menu.randint_func3()
+    else:
+        input("Μη έγκυρη επιλογή!\nΠατήστε ENTER για να ξαναδείτε τις επιλογές.\n")
+        main()
 
     rep = input("\nΘα θέλατε να δείτε κάποιο άλλο παράδειγμα; Υ/Ν: ")
     if rep == ('Y') or rep == ('y') or rep == ('Υ') or rep == ('υ'):
