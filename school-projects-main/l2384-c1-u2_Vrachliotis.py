@@ -57,17 +57,14 @@ def main():
     if selection == 3:
         menu.randn_func1()
     if selection == 4:
-        menu.rand_func2()
+        menu.randn_func2()
     if selection == 5:
         menu.randint_func1()
     if selection == 6:
         menu.randint_func2()
     if selection == 7:
         menu.randint_func3()
-    else:
-        input("Μη έγκυρη επιλογή!\nΠατήστε ENTER για να ξαναδείτε τις επιλογές.\n")
-        main()
-
+     
     rep = input("\nΘα θέλατε να δείτε κάποιο άλλο παράδειγμα; Υ/Ν: ")
     if rep == ('Y') or rep == ('y') or rep == ('Υ') or rep == ('υ'):
         main()
