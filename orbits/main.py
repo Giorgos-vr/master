@@ -28,23 +28,27 @@ center = (640, 360)
 defaultX = 640
 defaultY = 360
 
-# object basic parameters, angle_inc defines rotation speed
-# angle change per frame, the lower the value=the slower the rotation speed relative to orbit radius
+# object basic parameters
 
 distance1 = 75
-
 size1 = 6
 planet1_sound = mixer.Sound('G4_ff.wav')
-distance2 = 125
 
+distance2 = 125
 size2 = 10
 planet2_sound = mixer.Sound('C5_ff.wav')
-distance3 = 225
 
+distance3 = 225
 size3 = 9
 planet3_sound = mixer.Sound('C4_ff.wav')
-distance4 = 325
+sat_dist3 = 22
+sat_angle_inc3 = .12
+sat_size3 = 4
+sat_dist4 = 45
+sat_angle_inc4 = .08
+sat_size4 = 3
 
+distance4 = 325
 size4 = 14
 planet4_sound = mixer.Sound('C3_ff.wav')
 sat_dist1 = 30
@@ -53,14 +57,9 @@ sat_size1 = 2
 sat_dist2 = 60
 sat_angle_inc2 = .03
 sat_size2 = 5
-sat_dist3 = 22
-sat_angle_inc3 = .12
-sat_size3 = 4
-sat_dist4 = 45
-sat_angle_inc4 = .08
-sat_size4 = 3
 
 
+# this part was auto completed from Qt Designer, it's the options menu's items and their basic parameters such as labels and menu items
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -140,7 +139,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuFile.menuAction())
 
         
-
+        #this is the "exit" button, i think
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -163,17 +162,19 @@ class Ui_MainWindow(object):
         self.speed.setItemText(4, _translate("MainWindow", "Faster 1/2"))
         self.speed.setItemText(5, _translate("MainWindow", "Faster 1/3"))
         self.label_2.setText(_translate("MainWindow", "Speed and resonance frequency"))
+        #this is the file menu, there's only one option, "quit"
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.actionExit.setText(_translate("MainWindow", "Exit"))
         self.actionExit.setStatusTip(_translate("MainWindow", "Quit"))
         self.actionExit.setShortcut(_translate("MainWindow", "Ctrl+Q"))
 
-       
+       #clicking on the option must "connect" with something in order to trigger an action
         self.Run.clicked.connect(self.pressed)
         self.Run.clicked.connect(QtWidgets.qApp.quit)
 
         
-
+    #Qt Designer can only do so much, specific actions have to be added according to purpose
+    #in this case unchecking the planet boxes switches their flags to False and ensures they will not appear in the animation once it triggers
     def checked(self):
         if self.planet1__flag.isChecked() == False:
             main.Planet1 = False
@@ -192,6 +193,9 @@ class Ui_MainWindow(object):
         else:
             main.Planet4 = True
 
+
+    #this part conveys a set of parameters to the main(), user selection in the options-speed drop-down menu controls the animation's speed
+    # angle_inc defines the rotation speed, it is the angle change per frame so the lower the value=the slower the rotation speed relative to orbit radius
     def pressed(self):
         index = self.speed.currentIndex()
         if index == 0:
@@ -252,7 +256,7 @@ def main():
     class PlanetMove:
         def planetX(planet_orbit, distance, X):
             # changing this to a negative value will move the starting point
-            # to the left instead of the right where it is at the moment
+            # to the left instead of the right where it is as it is at the moment
             x = math.cos(planet_orbit) * distance + X
             return x
 
@@ -328,22 +332,22 @@ def main():
                 pass
         planet4_orbit += main.angle4_inc
 
-        # here we assign X4 and Y4 instead of the default ones in order
-        # to assign object to planet 4 as a satellite instead of assigning it to the central star as yet another planet
-        sat_X1 = PlanetMove.planetX(sat_orb1, sat_dist1, X4)
-        sat_Y1 = PlanetMove.planetY(sat_orb1, sat_dist1, Y4)
-        sat_orb1 += sat_angle_inc1
-        sat_X2 = PlanetMove.planetX(sat_orb2, sat_dist2, X4)
-        sat_Y2 = PlanetMove.planetY(sat_orb2, sat_dist2, Y4)
-        sat_orb2 += sat_angle_inc2
-
-        # same for the satellites of planet 3
+        #since satellites orbit planets, not stars, the defaultX and Y have to be replaced by the planet's dynamic coordinates
+        #in order to center the satellite around a planet and not our main star
         sat_X3 = PlanetMove.planetX(sat_orb3, sat_dist3, X3)
         sat_Y3 = PlanetMove.planetY(sat_orb3, sat_dist3, Y3)
         sat_orb3 += sat_angle_inc3
         sat_X4 = PlanetMove.planetX(sat_orb4, sat_dist4, X3)
         sat_Y4 = PlanetMove.planetY(sat_orb4, sat_dist4, Y3)
         sat_orb4 += sat_angle_inc4
+
+        # same for the satellites of planet 4
+        sat_X1 = PlanetMove.planetX(sat_orb1, sat_dist1, X4)
+        sat_Y1 = PlanetMove.planetY(sat_orb1, sat_dist1, Y4)
+        sat_orb1 += sat_angle_inc1
+        sat_X2 = PlanetMove.planetX(sat_orb2, sat_dist2, X4)
+        sat_Y2 = PlanetMove.planetY(sat_orb2, sat_dist2, Y4)
+        sat_orb2 += sat_angle_inc2
 
         # here we start drawing by first resetting the screen to black
         screen.fill(black)
@@ -353,8 +357,9 @@ def main():
             x, y = star[0], star[1]
             pygame.draw.line(screen, white, (x, y), (x, y))
 
-        # and then we add everything else starting with our stationary central star
+        # then we add everything else starting with our stationary central star
         pygame.draw.circle(screen, white, center, star_radius)
+        # and then, depending on the user's choises earlier we get the planets
         if main.Planet1 == True:
             img.Planet_1()
         else:
