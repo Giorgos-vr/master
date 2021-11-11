@@ -52,18 +52,20 @@ def main():
     selection = int(input("Επιλογή; "))
     if selection == 1:
         menu.rand_func1()
-    if selection == 2:
+    elif selection == 2:
         menu.rand_func2()
-    if selection == 3:
+    elif selection == 3:
         menu.randn_func1()
-    if selection == 4:
+    elif selection == 4:
         menu.randn_func2()
-    if selection == 5:
+    elif selection == 5:
         menu.randint_func1()
-    if selection == 6:
+    elif selection == 6:
         menu.randint_func2()
-    if selection == 7:
+    elif selection == 7:
         menu.randint_func3()
+    else:
+        print("invalid selection")
      
     rep = input("\nΘα θέλατε να δείτε κάποιο άλλο παράδειγμα; Υ/Ν: ")
     if rep == ('Y') or rep == ('y') or rep == ('Υ') or rep == ('υ'):
