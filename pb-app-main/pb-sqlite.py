@@ -8,6 +8,21 @@ os.makedirs(file_path, exist_ok=True)
 db = os.path.join(file_path, "pb.db")
 con = sl.connect(db)
 
+def create_connection(db):
+    """ create a database connection to a SQLite database """
+    conn = None
+    try:
+        conn = sl.connect(db)
+        print(sl.version)
+    except Error as e:
+        print(e)
+    finally:
+        if conn:
+            conn.close()
+
+
+if __name__ == '__main__':
+    create_connection(db)
 
 #with con:
     #con.execute ("""
@@ -27,7 +42,7 @@ con = sl.connect(db)
 #with con:
     #con.executemany(sql, data)
 
-with con:
-    data = con.execute('SELECT * FROM pb WHERE id <= 3')
-    for row in data:
-        print(row)
+#with con:
+    #data = con.execute('SELECT * FROM pb WHERE id <= 3')
+    #for row in data:
+        #print(row)
