@@ -19,15 +19,36 @@ def create_connection(db):
         print(e)
     return con
 
-def create_table(con, pb_db):
+def create_table(con, db):
     try:
         curs = con.cursor()
-        curs.execute(pb_db)
+        curs.execute(db)
     except Error as err:
         print(err)
     finally:
         if con is None:
             con.close()
+
+def add_data(con, db):
+
+    sql = ''' INSERT INTO PB(name,number_primary,number_secondary,email,anniversary)
+    VALUES(?,?,?,?,?) '''
+    cur = con.cursor()
+    cur.execute(sql, db)
+    con.commit()
+    print (cur.lastrowid)
+
+def update_data(con, db):
+    sql = ''' UPDATE PB SET name = ? ,
+                            number_primary = ? ,
+                            number_secondary = ? ,
+                            email = ? ,
+                            anniversary = ?
+                        WHERE id = ?'''
+    cur = con.cursor()
+    cur.execute(sql, db)
+    con.commit()
+
 
 def main():
     
@@ -46,6 +67,14 @@ def main():
 
     else:
         print("Error!!!")
+
+    with con:
+        data = ('Nick','0002','2000','nick@mail.com','1985-03-26',2)
+        data2 = ('John','0004','','john@mail.com','2005-05-26');
+        add_data(con, data2)
+        update_data(con, data)
+
+
 
 
 if __name__ == '__main__':
