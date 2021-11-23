@@ -19,6 +19,7 @@ def create_connection(db):
         print(e)
     return con
     
+    
 
 def create_table(con, db):
     try:
@@ -40,14 +41,14 @@ def view_all(con):
     
 
 def add_data(con, db):
-
     sql = ''' INSERT INTO PB(name,number_primary,number_secondary,email,anniversary)
     VALUES(?,?,?,?,?) '''
     cur = con.cursor()
     cur.execute(sql, db)
     con.commit()
-    print (f"added successfully, entry id is #{cur.lastrowid}")
-
+    print (f"Contact added successfully, entry id is #{cur.lastrowid}")
+    loop = input("Press Enter to continue.")
+    
 def update_data(con, db):
     sql = ''' UPDATE PB SET name = ? ,
                             number_primary = ? ,
@@ -77,9 +78,9 @@ def main():
     else:
         print("Error!!!")
 
-    print ("""this is v0.2 of my phonebook app
-it should have the same functionality as the first one except
-this time using SQLite3 instead of an empty dictionary thus offering permanent storage...
+    print ("""This is v0.2 of my phonebook app
+it should have the same functionality as the first one except this time
+using SQLite3 instead of an empty dictionary thus offering permanent storage...
 hopefully...
     
 """)
@@ -95,41 +96,57 @@ Press 4 to edit an existing contact.
 Press 5 to delete a contact.
 Press 6 to exit.""")
 
-        selection = int(input("What would you like to do? "))
+        while True:
+            try:
+                selection = int(input("What would you like to do? "))
+                break
+            except:
+                print("invalid selection")
+                loop = input("Press Enter to view the menu...")
+                menu()
 
 
-        #replace with try except
-        if type(selection) == type(ValueError):
-            print("Invalid selection")
-            loop = input("Press Enter to continue ...")
-            menu()
-    
-        elif selection == 1:
+        
+        if selection == 1:
             view_all(con)
             loop = input("Press Enter to continue ...")
             menu()
 
         elif selection == 2:
-            print("""Press 1 to search by Name.
+            def sel2():
+                print("""Press 1 to search by Name.
 Press 2 to search by Number.
 Press 3 to search by Email.
 Press 4 to go back to the main menu.""")
-            sel2 = input("What would you like to do? ")
-            if sel2 == 1:
-                    pass
-            if sel2 == 2:
-                    pass
-            if sel2 == 3:
-                    pass
-            if sel2 == 4:
-                    menu()
-            else:
-                    print("Invalid selection")
-                    loop = input("Press Enter to continue ...")
-                    menu()
+                while True:
+                    try:
+                        selection = int(input("What would you like to do? "))
+                        break
+                    except:
+                        print("invalid selection")
+                        loop = input("Press Enter to go back to the main menu...")
+                        sel2()
 
+
+                if selection == 1:
+                        pass
+                elif selection == 2:
+                        pass
+                elif selection == 3:
+                        pass
+                elif selection == 4:
+                    menu()
+            sel2()
+                
         elif selection == 3:
-                pass
+                name = str(input("Name (mandatory)?\n"))
+                number_primary = str(input("Primay number (mandatory)?\n"))
+                number_secondary = str(input("Secontary number (optional)?\n"))
+                email = str(input("Email (optional)?\n"))
+                date = str(input("Important date (eg birthday, Optional)?\n"))
+                data = (name, number_primary, number_secondary, email, date);
+                add_data(con, data)
+                menu()
         elif selection == 4:
                 pass
         elif selection == 5:
@@ -153,8 +170,6 @@ Press 4 to go back to the main menu.""")
 
         #with con:
             #data = ('Nick','0002','2000','nick@mail.com','1985-03-26',2)
-            #data2 = ('Chris','424242','212121','chris@mail.com','');
-            #add_data(con, data2)
             #update_data(con, data)
 
 
