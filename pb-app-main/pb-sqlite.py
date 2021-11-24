@@ -49,6 +49,29 @@ def add_data(con, db):
     print (f"Contact added successfully, entry id is #{cur.lastrowid}")
     loop = input("Press Enter to continue.")
     
+
+def search_name(con, query):
+    sql = '''SELECT * FROM pb WHERE name LIKE ?'''
+    cur = con.cursor()
+    cur.execute(sql, query)
+    rows = cur.fetchall()
+    if len(rows) == 0:
+        print("No results found!")
+    else:
+        for row in rows:
+            print(row)
+
+def search_number(con, query):
+    sql = '''SELECT * FROM pb WHERE number_primary LIKE ? OR number_secondary LIKE ?'''
+    cur = con.cursor()
+    cur.execute(sql, query)
+    rows = cur.fetchall()
+    if len(rows) == 0:
+        print("No results found!")
+    else:
+        for row in rows:
+            print(row)
+
 def update_data(con, db):
     sql = ''' UPDATE PB SET name = ? ,
                             number_primary = ? ,
@@ -124,16 +147,26 @@ Press 4 to go back to the main menu.""")
                         break
                     except:
                         print("invalid selection")
-                        loop = input("Press Enter to go back to the main menu...")
+                        loop = input("Press Enter to go back to the menu...")
                         sel2()
 
 
                 if selection == 1:
-                        pass
+                    wild = "%"
+                    name = str(input("Name:\n"))
+                    data = (f"{wild}{name}{wild}",);
+                    search_name(con, data)
+                    loop = input("Press Enter to go back to the menu...")
+                    menu()
                 elif selection == 2:
-                        pass
+                    wild = "%"
+                    name = str(input("Number:\n"))
+                    data = (f"{wild}{name}{wild}", f"{wild}{name}{wild}");
+                    search_number(con, data)
+                    loop = input("Press Enter to go back to the menu...")
+                    menu()
                 elif selection == 3:
-                        pass
+                    pass
                 elif selection == 4:
                     menu()
             sel2()
