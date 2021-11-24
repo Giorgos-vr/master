@@ -18,8 +18,6 @@ def create_connection(db):
     except Error as e:
         print(e)
     return con
-    
-    
 
 def create_table(con, db):
     try:
@@ -40,18 +38,17 @@ def view_all(con):
         print(row)
     
 
-def add_data(con, db):
+def add_data(con, entry):
     sql = ''' INSERT INTO PB(name,number_primary,number_secondary,email,anniversary)
     VALUES(?,?,?,?,?) '''
     cur = con.cursor()
-    cur.execute(sql, db)
+    cur.execute(sql, entry)
     con.commit()
     print (f"Contact added successfully, entry id is #{cur.lastrowid}")
-    loop = input("Press Enter to continue.")
     
 
-def search_name(con, query):
-    sql = '''SELECT * FROM pb WHERE name LIKE ?'''
+def search(con, query):
+    sql = '''SELECT * FROM pb WHERE number_primary LIKE ? OR number_secondary LIKE ? OR name LIKE ? OR email LIKE ?'''
     cur = con.cursor()
     cur.execute(sql, query)
     rows = cur.fetchall()
@@ -60,19 +57,8 @@ def search_name(con, query):
     else:
         for row in rows:
             print(row)
-
-def search_number(con, query):
-    sql = '''SELECT * FROM pb WHERE number_primary LIKE ? OR number_secondary LIKE ?'''
-    cur = con.cursor()
-    cur.execute(sql, query)
-    rows = cur.fetchall()
-    if len(rows) == 0:
-        print("No results found!")
-    else:
-        for row in rows:
-            print(row)
-
-def update_data(con, db):
+                      
+def update_data(con, query):
     sql = ''' UPDATE PB SET name = ? ,
                             number_primary = ? ,
                             number_secondary = ? ,
@@ -80,9 +66,16 @@ def update_data(con, db):
                             anniversary = ?
                         WHERE id = ?'''
     cur = con.cursor()
-    cur.execute(sql, db)
+    cur.execute(sql, query)
     con.commit()
+    print ("Contact updated successfully!")
 
+def delete_entry(con, query):
+    sql = 'DELETE FROM pb WHERE id=?'
+    cur = con.cursor()
+    cur.execute(sql, (query,))
+    con.commit()
+    print ("Contact successfully deleted!")
 
 def main():
     pb_db = """CREATE TABLE PB
@@ -136,40 +129,12 @@ Press 6 to exit.""")
             menu()
 
         elif selection == 2:
-            def sel2():
-                print("""Press 1 to search by Name.
-Press 2 to search by Number.
-Press 3 to search by Email.
-Press 4 to go back to the main menu.""")
-                while True:
-                    try:
-                        selection = int(input("What would you like to do? "))
-                        break
-                    except:
-                        print("invalid selection")
-                        loop = input("Press Enter to go back to the menu...")
-                        sel2()
-
-
-                if selection == 1:
-                    wild = "%"
-                    name = str(input("Name:\n"))
-                    data = (f"{wild}{name}{wild}",);
-                    search_name(con, data)
-                    loop = input("Press Enter to go back to the menu...")
-                    menu()
-                elif selection == 2:
-                    wild = "%"
-                    name = str(input("Number:\n"))
-                    data = (f"{wild}{name}{wild}", f"{wild}{name}{wild}");
-                    search_number(con, data)
-                    loop = input("Press Enter to go back to the menu...")
-                    menu()
-                elif selection == 3:
-                    pass
-                elif selection == 4:
-                    menu()
-            sel2()
+            wild = "%"
+            entry = str(input("Search:\n"))
+            data = (f"{wild}{entry}{wild}", f"{wild}{entry}{wild}", f"{wild}{entry}{wild}", f"{wild}{entry}{wild}");
+            search(con, data)
+            loop = input("Press Enter to go back to the main menu...")
+            menu()
                 
         elif selection == 3:
                 name = str(input("Name (mandatory)?\n"))
@@ -181,9 +146,55 @@ Press 4 to go back to the main menu.""")
                 add_data(con, data)
                 menu()
         elif selection == 4:
-                pass
+            wild = "%"
+            print("Search for the contact you wish to update and make a note of its id number.")
+            entry = str(input("Search:\n"))
+            data = (f"{wild}{entry}{wild}", f"{wild}{entry}{wild}", f"{wild}{entry}{wild}", f"{wild}{entry}{wild}");
+            search(con, data)
+            while True:
+                try:
+                    selection = int(input("Please enter the id number of the contact you wish to update:\n"))
+                    break
+                except:
+                    print("invalid selection")
+                    loop = input("Press Enter to go back to the main menu...")
+                    menu()
+            print("Please enter the new details.")
+            name = str(input("Name (mandatory)?\n"))
+            number_primary = str(input("Primay number (mandatory)?\n"))
+            number_secondary = str(input("Secontary number (optional)?\n"))
+            email = str(input("Email (optional)?\n"))
+            date = str(input("Important date (eg birthday, optional)?\n"))
+            data = (name, number_primary, number_secondary, email, date, selection)
+            with con:
+                update_data(con, data)
+            loop = input("Press Enter to continue.")
+            menu()
+
         elif selection == 5:
-                pass
+            wild = "%"
+            print("Search by name, number or email for the contact you wish to delete and make a note of its id number.")
+            entry = str(input("Search:\n"))
+            data = (f"{wild}{entry}{wild}", f"{wild}{entry}{wild}", f"{wild}{entry}{wild}", f"{wild}{entry}{wild}");
+            search(con, data)
+            while True:
+                try:
+                    selection = int(input("Please enter the id number of the contact you wish to delete:\n"))
+                    break
+                except:
+                    print("invalid selection")
+                    loop = input("Press Enter to go back to the main menu...")
+                    menu()
+            confirm = str(input("Are you sure you wish to delete this? Y/N?\n"))
+            if confirm == ('Y') or confirm == ('y') or confirm == ('Υ') or confirm == ('υ'):
+                delete_entry(con, selection)
+                loop = input("Press Enter to return to the main menu.")
+                menu()
+            else:
+                loop = input("Selection cancelled!\nPress Enter to return to the main menu.")
+                menu()
+
+
         elif selection == 6:
                 exit()
         
@@ -196,16 +207,6 @@ Press 4 to go back to the main menu.""")
 
 
     menu()
-    
-
-
-    
-
-        #with con:
-            #data = ('Nick','0002','2000','nick@mail.com','1985-03-26',2)
-            #update_data(con, data)
-
-
 
 
 if __name__ == '__main__':
