@@ -10,7 +10,6 @@ os.makedirs(file_path, exist_ok=True)
 db = os.path.join(file_path, "pb.db")
 
 def create_connection(db):
-    #create a database connection to a SQLite database
     con = None
     try:
         con = sl.connect(db)
