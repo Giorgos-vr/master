@@ -105,7 +105,7 @@ hopefully...
     def menu():
 
         print("""Press 1 to view all entries.
-Press 2 to search for a specific contact.
+Press 2 to search for a contact.
 Press 3 to add a new contact.
 Press 4 to edit an existing contact.
 Press 5 to delete a contact.
