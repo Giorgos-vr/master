@@ -30,7 +30,7 @@ def create_table(con, db):
 
 def view_all(con):
     curs = con.cursor()
-    curs.execute("SELECT * FROM pb")
+    curs.execute("SELECT * FROM pb ORDER BY name ASC")
     rows = curs.fetchall()
 
     for row in rows:
@@ -47,7 +47,7 @@ def add_data(con, entry):
     
 
 def search(con, query):
-    sql = '''SELECT * FROM pb WHERE number_primary LIKE ? OR number_secondary LIKE ? OR name LIKE ? OR email LIKE ?'''
+    sql = '''SELECT * FROM pb WHERE number_primary LIKE ? OR number_secondary LIKE ? OR name LIKE ? OR email LIKE ? ORDER BY name ASC'''
     cur = con.cursor()
     cur.execute(sql, query)
     rows = cur.fetchall()
