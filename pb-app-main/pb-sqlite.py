@@ -195,7 +195,8 @@ Press 6 to exit.""")
 
 
         elif selection == 6:
-                exit()
+            print("Thank you for using this super-awesome-SQlite3-phonebook-terminal-app!")
+            exit()
         
         else:
             print("Invalid selection")
