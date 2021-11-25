@@ -77,7 +77,7 @@ def delete_entry(con, query):
     print ("Contact successfully deleted!")
 
 def main():
-    pb_db = """CREATE TABLE PB
+    pb_db = """CREATE TABLE pb
         (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         number_primary TEXT NOT NULL,
