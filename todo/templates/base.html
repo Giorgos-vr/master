@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDoApp</title>
+</head>
+<body>
+    
+    <h1>ToDoApp</h1>
+    <form action="">
+        <div>
+            <label for="title">ToDo Title</label>
+            <input type="text" name="title" placeholder="Type Something...">
+            <br>
+            <button type="submit">Add</button>
+
+
+        </div>
+    </form>
+
+    {% for todo in todo_list %}
+
+    <p> {{ todo.id }} | {{ todo.title }} </p>
+
+    {% if todo.complete == False%}
+        <span>Pending</span>
+
+    {% else %}
+        <span>Done!</span>
+    {% endif %}
+
+    <a href="/">Update</a>
+    <a href="/">Delete</a>
+
+    {% endfor %}
+
+</body>
+</html>
