@@ -16,7 +16,7 @@ def home():
         if len(note)<3:
             flash('note too short, must be at least 3 characters long', category="Error")
         else:
-            new_note = Note(data=note, user_id=current_user.id)
+            new_note = Note(data=note, user_id=current_user.id, complete=False)
             db.session.add(new_note)
             db.session.commit()
             flash('Note Saved', category="Confirm")
@@ -33,5 +33,19 @@ def delete_note():
             db.session.delete(note)
             db.session.commit()
             flash('Note Deleted', category="Confirm")
+            
+    return jsonify({})
+
+@views.route('/change-note', methods=['POST'])
+def change_note():
+    note = json.loads(request.data)
+    noteId = note['noteId']
+    note = Note.query.get(noteId)
+    if note:
+        if note.user_id == current_user.id:
+            note = Note.query.filter_by(id=noteId).first()
+            note.complete = not note.complete
+            db.session.commit()
+            flash('Note changed', category="Confirm")
             
     return jsonify({})
