@@ -6,7 +6,16 @@
 <ul class="list-group list-group-flush" id="notes">
     {% for note in user.notes %}
     <li class="list-group-item">
-        {{ note.data }}
+        {{ note.id }} | {{ note.data }}
+    {% if note.complete == False %}
+    <span class="ui gray label">Pending</span>
+
+    {% else %}
+    <span class="ui blue label">Done!</span>
+    {% endif %}
+        <button type='button' class='alert' onClick="changeNote({{ note.id }})">AAA
+            
+        </button>
         <button type='button' class='close' onClick="deleteNote({{ note.id }})">
             <span aria-hidden='true'>&times;</span>
         </button>
