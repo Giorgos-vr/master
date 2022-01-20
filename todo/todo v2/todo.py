@@ -19,7 +19,6 @@ def add(task: str, category: str):
 @app.command()
 def delete(position: int):
     typer.echo(f"deleting {position}")
-    # indices in UI begin at 1, but in database at 0
     delete_todo(position-1)
     show()
 
