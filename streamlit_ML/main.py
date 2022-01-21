@@ -1,9 +1,13 @@
 import streamlit as st
 import numpy as np
+import matplotlib.pyplot as plt
 from sklearn import datasets
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+from  sklearn.decomposition import PCA
 
 
 st.title("Test")
@@ -60,3 +64,28 @@ def get_class(clf_name, param):
     return clf
 
 clf = get_class(classifier_name, param)
+
+#classification
+
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=420)
+clf.fit(X_train, Y_train)
+Y_prd=clf.predict(X_test)
+acc = accuracy_score(Y_test, Y_prd)
+
+st.write(f"classifier = {classifier_name}")
+st.write(f"accuracy = {acc}")
+
+#plot
+
+pca = PCA(2) #2-D
+X_projected = pca.fit_transform(X)
+x1 = X_projected[:, 0]
+x2 = X_projected[:, 1]
+
+fig = plt.figure()
+plt.scatter(x1, x2, c=Y, alpha=0.75, cmap="viridis")
+plt.xlabel("Comp 1")
+plt.ylabel("Comp 2")
+plt.colorbar()
+
+st.pyplot(fig)
