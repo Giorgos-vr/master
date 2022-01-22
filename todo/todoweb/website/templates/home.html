@@ -8,14 +8,18 @@
     <li class="list-group-item">
         {{ note.id }} | {{ note.data }}
     {% if note.complete == False %}
-    <span class="ui gray label">Pending</span>
+    <br>
+    <span style="color:red;font-weight:bolder">Pending</span>
+    <br>
+    <button type='button' class='alert' onClick="changeNote({{ note.id }})">Update</button>
 
     {% else %}
-    <span class="ui blue label">Done!</span>
+    <br>
+    <span style="color: lightgreen;font-weight:bolder">Done!</span>
+    <br>
+    <button type='button' class='alert' onClick="changeNote({{ note.id }})">Update</button>
+    
     {% endif %}
-        <button type='button' class='alert' onClick="changeNote({{ note.id }})">AAA
-            
-        </button>
         <button type='button' class='close' onClick="deleteNote({{ note.id }})">
             <span aria-hidden='true'>&times;</span>
         </button>
