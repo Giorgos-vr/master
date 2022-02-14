@@ -6,6 +6,7 @@ import speech_recognition as sr
 from gtts import gTTS as gt
 
 
+
 def say(text):
     tts = gt(text=text, lang="el")
     filename = "say.mp3"
@@ -15,13 +16,13 @@ def say(text):
 
 
 
+
 def audioIn():
     r = sr.Recognizer()
     with sr.Microphone() as source:
         audio = r.listen(source)
         global user_said
         user_said = ""
-        
 
         try:
             user_said = r.recognize_google(audio, language = "el-GR")
@@ -32,8 +33,14 @@ def audioIn():
     return user_said
 
 
+def greetUser(user_said):
+    say(f"Γειά σου {user_said}")
+
+
+
 def start():
     say("Γειά σου, με λένε Τίνα, από το Ρομποτίνα. Εσένα πως σε λένε;")
-    audioIn(); say(f"Γειά σου {user_said}")
+    audioIn()
+    greetUser(user_said)
 
 start()
