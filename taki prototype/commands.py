@@ -29,8 +29,10 @@ class command:
             try:
                 command.user_said = r.recognize_google(audio, language = "el-GR")
                 print(command.user_said)
-            except Exception as e:
-                print ("Exception: " + str(e))
+            except sr.UnknownValueError:
+                command.say("Δεν σε κατάλαβα, συγνώμη!")
+            except sr.RequestError:
+                command.say("Αδυναμία σύνδεσης!")
         
         return command.user_said
 
