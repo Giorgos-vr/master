@@ -1,14 +1,8 @@
-from fileinput import filename
-from .commands import *
-import os
-import time
-import playsound
-import speech_recognition as sr
-from gtts import gTTS as gt
+from commands import *
 
 
 def main():
-    pass
+    command.start()
 
 
 if __name__ == '__main__':
