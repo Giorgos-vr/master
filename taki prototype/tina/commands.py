@@ -7,7 +7,10 @@ from gtts import gTTS as gt
 
 
 class Command:
-    user_said = ""
+
+    def __init__(self):
+        Command.user_said = ""
+        Command.user_name = ""
 
     
     def say(text):
@@ -38,8 +41,8 @@ class Command:
 
 
     def greetUser():
-        user_said = Command.user_said
-        Command.say(f"Γειά σου {user_said}")
+        Command.user_name = Command.user_said
+        Command.say(f"Γειά σου {Command.user_name}")
 
 
 
@@ -47,3 +50,13 @@ class Command:
         Command.say("Γειά σου, με λένε Τίνα, από το Ρομποτίνα. Εσένα πως σε λένε;")
         Command.audioIn()
         Command.greetUser()
+
+    def introMenu():
+        Command.say(f"{Command.user_name} θέλεις να παίξουμε;")
+        input = Command.audioIn()
+        if "ναι" in input:
+            Command.say("ναι!")
+        elif "αμέ" in input:
+            Command.say("αμέ")
+        else:
+            pass
