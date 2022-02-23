@@ -43,6 +43,8 @@ class Command:
     def greetUser():
         Command.user_name = Command.user_said
         Command.say(f"Γειά σου {Command.user_name}")
+        
+        return Command.user_name
 
 
 
@@ -54,9 +56,8 @@ class Command:
     def introMenu():
         Command.say(f"{Command.user_name} θέλεις να παίξουμε;")
         input = Command.audioIn()
-        if "ναι" in input:
-            Command.say("ναι!")
-        elif "αμέ" in input:
-            Command.say("αμέ")
+        if "ναι" in input or "αμέ" in input or "αχά" in input:
+            Command.say("Τέλεια!")
+            #call mainMenu()
         else:
             pass
