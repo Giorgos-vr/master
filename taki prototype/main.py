@@ -62,4 +62,3 @@ def start_recognizer():
 
 
 start_recognizer()
-#test
