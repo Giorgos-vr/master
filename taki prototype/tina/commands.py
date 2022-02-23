@@ -54,10 +54,15 @@ class Command:
         Command.greetUser()
 
     def introMenu():
-        Command.say(f"{Command.user_name} θέλεις να παίξουμε;")
-        input = Command.audioIn()
-        if "ναι" in input or "αμέ" in input or "αχά" in input:
+        Command.say(f"{Command.user_name} θέλεις να παίξουμε?")
+        input = Command.audioIn().lower().split(' ')
+        print(input)
+        positive_input = ["ναι", "αμέ", "αχά"]
+        if any(word in input for word in positive_input):
             Command.say("Τέλεια!")
             #call mainMenu()
+#        if "ναι" in input or "αμέ" in input or "αχά" in input:
+#            Command.say("Τέλεια!")
+            #call mainMenu()
         else:
-            pass
+            Command.say("Κρίμα!")
