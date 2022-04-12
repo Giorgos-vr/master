@@ -1,0 +1,162 @@
+#:kivy 2.0
+WindowManager:
+    MenuWindow:
+    ShapeGame:
+    ItemGame:
+    NumberGame:
+    LetterGame:
+
+
+<MenuWindow>:
+    name: "menu"
+    id: MenuWindow
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+
+        Image:
+            id:"menu"
+            screen: MenuWindow
+            source: root.tina
+            before_source: self.source
+            
+        BoxLayout:
+            size_hint: 1.0, 0.2
+            Button:
+                text: "Shapes&colours"
+                font_size: 22
+                on_release:
+                    app.root.current = "shapes"
+                    root.manager.transition.direction = "left"
+            Button:
+                text: "Items&animals"
+                font_size: 22
+                on_release:
+                    app.root.current = "items"
+                    root.manager.transition.direction = "left"
+
+            Button:
+                text: "Numbers"
+                font_size: 22
+                on_release:
+                    app.root.current = "numbers"
+                    root.manager.transition.direction = "left"
+
+            Button:
+                text: "Letters"
+                font_size: 22
+                on_release:
+                    app.root.current = "letters"
+                    root.manager.transition.direction = "left"
+                
+        Button:
+            text: "Exit"
+            font_size: 22
+            size_hint: 1.0, 0.2
+            on_release: app.root.current = exit()
+
+<ShapeGame>:
+    name: "shapes"
+    id: ShapeGame
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        Image:
+            id:"shapes"
+            screen: ShapeGame
+            source: root.rand_shape
+            before_source: self.source
+
+        BoxLayout:
+            size_hint: 1.0, 0.2
+            size: root.width, root.height
+            Button:
+                text: "Menu"
+                font_size: 22
+                on_release:
+                    app.root.current = "menu"
+                    root.manager.transition.direction = "right"
+                    
+            Button:
+                text: "Exit"
+                font_size: 22
+                on_release:
+                    app.root.current = exit()
+
+<ItemGame>:
+    name: "items"
+    id: ItemGame
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        Image:
+            id:"item"
+            screen: ItemGame
+            source: root.rand_item
+            before_source: self.source
+
+        BoxLayout:
+            size_hint: 1.0, 0.2
+            size: root.width, root.height
+            Button:
+                text: "Menu"
+                font_size: 22
+                on_release:
+                    app.root.current = "menu"
+                    root.manager.transition.direction = "right"
+            Button:
+                text: "Exit"
+                font_size: 22
+                on_release: app.root.current = exit()
+
+<NumberGame>:
+    name: "numbers"
+    id: NumberGame
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        Image:
+            id:"number"
+            screen: NumberGame
+            source: root.rand_number
+            before_source: self.source
+
+        BoxLayout:
+            size_hint: 1.0, 0.2
+            size: root.width, root.height
+            Button:
+                text: "Menu"
+                font_size: 22
+                on_release:
+                    app.root.current = "menu"
+                    root.manager.transition.direction = "right"
+            Button:
+                text: "Exit"
+                font_size: 22
+                on_release: app.root.current = exit()
+
+<LetterGame>:
+    name: "letters"
+    id: LetterGame
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        Image:
+            id:"letter"
+            screen: LetterGame
+            source: root.rand_letter
+            before_source: self.source
+        BoxLayout:
+            size_hint: 1.0, 0.2
+            size: root.width, root.height
+            Button:
+                text: "Menu"
+                font_size: 22
+                on_release:
+                    app.root.current = "menu"
+                    root.manager.transition.direction = "right"
+            Button:
+                text: "Exit"
+                font_size: 22
+                on_release: app.root.current = exit()
+
